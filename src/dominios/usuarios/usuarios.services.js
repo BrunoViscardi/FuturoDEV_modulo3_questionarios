@@ -10,7 +10,7 @@ class UsuariosServices {
         return usuarios
     }
 
-    async createUser({ email, nome, sobrenome, senha }) {
+    async createUser({ email, nome, sobrenome, permissao, senha }) {
         const usuarioExiste = await usuarioModel.findOne({
             where: {
                 email,
@@ -27,7 +27,8 @@ class UsuariosServices {
         const usuario = await usuarioModel.create({
             email, 
             nome, 
-            sobrenome, 
+            sobrenome,
+            permissao, 
             senha: senhaCriptografada
         })
 

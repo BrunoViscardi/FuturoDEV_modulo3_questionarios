@@ -27,7 +27,7 @@ const Usuario = database.define('usuarios', {
       },
       permissao: {
         type: Sequelize.STRING,
-        allowNull: truee,
+        allowNull: true,
       },
       createdAt: {
         type: Sequelize.DATE,
