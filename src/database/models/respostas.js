@@ -2,22 +2,32 @@ const Sequelize = require('sequelize')
 const database = require('../config')
 
 
-const Perguntas = database.define('perguntas', {
+const Respostas = database.define('respostas', {
     id: {
         type: Sequelize.STRING,
         allowNull: false,
         primaryKey: true,
         defaultValue: Sequelize.UUIDV4,
       },
-      descricao: {
+      conteudo: {
         type: Sequelize.TEXT,
         allowNull: false
       },
-      questionarioId: {
+      perguntaId: {
         type: Sequelize.STRING,
         allowNull: false,
         references: {
-          model: 'questionarios',
+          model: 'perguntas',
+          key: 'id'
+        },
+        onUpdate: 'CASCADE',// vai atualizar esse campo caso o id do questionario seja atualizado
+        onDelete: 'CASCADE' // vai apagar o item caso questionário seja deletado
+      },
+      usuarioId: {
+        type: Sequelize.STRING,
+        allowNull: false,
+        references: {
+          model: 'usuarios',
           key: 'id'
         },
         onUpdate: 'CASCADE',// vai atualizar esse campo caso o id do questionario seja atualizado
@@ -30,9 +40,9 @@ const Perguntas = database.define('perguntas', {
       updatedAt: {
         type: Sequelize.DATE,
         defaultValue: Sequelize.NOW,
-      },
+    }
 })
 
-
-
-module.exports = Perguntas
+module.exports = {
+    Respostas
+}

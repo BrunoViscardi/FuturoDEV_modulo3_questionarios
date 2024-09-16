@@ -10,8 +10,9 @@ class QuestionariosControllers {
      * @returns 
      */
     async index(request, response) {
-        const listaQuestionarioss = await questionariosService.list()
-
+        const { carregarPerguntas } = request.query
+        const listaQuestionarioss = await questionariosService.list(carregarPerguntas)
+        
         return response.json(listaQuestionarioss)
     }
     /**
@@ -35,9 +36,9 @@ class QuestionariosControllers {
      */
     async delete(request, response) {
         const { id } = request.params
-
+        
         const apagou = await questionariosService.delete(id)
-
+        
         if(!apagou) {
             return response.status(400).json({ message: "Não foi possivel apagar"})
         }
