@@ -26,7 +26,7 @@ const respostasControllers = new RespostasControllers()
 //     }),
 // })
 
-// respostasRouter.use(garantirAutenticacaoRBAC('criador'))
+respostasRouter.use(garantirAutenticacaoRBAC('estudante'))
 
 // respostasRouter.get('/', respostasControllers.index)
 respostasRouter.use(garantirAutenticacao)

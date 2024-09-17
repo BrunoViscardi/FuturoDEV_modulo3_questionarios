@@ -2,6 +2,7 @@ require('dotenv').config()
 
 const database = require('./database/config')
 const express = require('express')
+const { garantirAutenticacaoRBAC } = require('../src/middlewares/garantirAutenticacao');
 
 
 const usuarioRouter = require('./dominios/usuarios')
@@ -16,8 +17,10 @@ app.use(express.json()) // middleware => interceptador
 
 /** DEFINIÇÃO DE ROTAS */
 app.use('/usuarios', usuarioRouter)
+//app.use('/questionarios', garantirAutenticacaoRBAC('criador'), questionariosRouter)
 app.use('/questionarios', questionariosRouter)
 app.use('/sessions', sessionsRouter)
+//app.use('/respostas', garantirAutenticacaoRBAC('estudante'), respostasRouter)
 app.use('/respostas', respostasRouter)
 
 async function iniciarServidor() {

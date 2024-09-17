@@ -21,13 +21,14 @@ class SessionServices {
 
         if(!senhaCriptografada) return null 
         
-        const token = sign({ permissao: 'criador' }, jwtSecret, {
+        const token = sign({ permissao: usuario.permissao }, jwtSecret, {
             subject: usuario.id,
             expiresIn: '1d'
         })
 
         return {
             usuario,
+            permissao: usuario.permissao,
             token
         }
     }
